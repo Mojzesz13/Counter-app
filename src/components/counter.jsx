@@ -5,26 +5,25 @@ class Counter extends Component {
         const {counter, onIncrement, onDelete, onDecrement} = this.props;
         return (
             <div className="row">
-                <div className="col-sm-1 align-self-start ">
+                <div className="col-1 align-self-start ">
                     <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
                 </div>
                 <div className="col align-self-start">
                     <button
-                        className="btn btn-secondary btn-sm m-2"
+                        className="btn btn-secondary btn-sm "
                         onClick={() => onIncrement(counter)}
                     >
                         +
                     </button>
-
-
                     <button
-                        className={this.disabledClasses()}
+                        className="btn btn-secondary btn-sm m-2"
                         onClick={() => onDecrement(counter)}
+                        disabled={this.props.counter.value < 1 ? true : null}
                     >
                         -
                     </button>
                     <button
-                        className="btn btn-danger btn-sm m-2"
+                        className="btn btn-danger btn-sm"
                         onClick={() => onDelete(counter.id)}
                     >
                         x
@@ -43,22 +42,6 @@ class Counter extends Component {
     formatCount() {
         const {value} = this.props.counter;
         return value === 0 ? 'Zero' : value;
-    }
-
-    disabledClasses() {
-        let test = "btn btn-secondary btn-sm m-2 "
-        test  +=(this.props.counter.value < 1 ? "disabled" : "" );
-        return test ;
-    }
-
-    disableFunction() {
-        let {click} = this.props.counter.value;
-
-        if (click > 1) {
-            return () => this.props.onDelete(this.props.counter.id)
-        } else {
-            console.log(this.props.counter.value)
-        }
     }
 }
 
